@@ -1,18 +1,22 @@
-from contextlib import closing
+import os
 import requests
-from urllib.request import urlretrieve
-
-# download_header = {
-#     'Referer': 'https://www.dmzj.com/view/yaoshenji/41917.html'
-# }
-# dn_url = 'https://images.dmzj.com/img/chapterpic/3059/14237/14395217739069.jpg'
-# with closing(requests.get(dn_url, headers=download_header, stream=True)) as response:
-#     with open('1.jpg', "wb") as file:
-#         for data in response.iter_content():
-#             file.write(data)
+from bs4 import BeautifulSoup
+from tqdm import tqdm
+from multiprocessing import Pool
+from concurrent.futures import ThreadPoolExecutor,ProcessPoolExecutor
+from multiprocessing import Pool
+import time
+import math
 
 
-
-
-
-
+def func(i):
+    url="http://dh5.cntv.myalicdn.com/asp/h5e/hls/1200/0303000a/3/default/fb541bc36f704cf786f8d6d798af34e0/%d.ts"%i
+    r=requests.get(url)
+    ron=r.content
+    with open("../../爬取成功/shipin.ts","wb") as f:
+        f.write(ron)
+if __name__=='__main__':
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"}
+    func(0)
+    print("ok")
